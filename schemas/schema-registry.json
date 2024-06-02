@@ -1,0 +1,32 @@
+{
+  "schemas": {
+    "product": {
+      "version": "1.0.0",
+      "schema": {
+        "$id": "product",
+        "type": "object",
+        "properties": {
+          "id": { "type": "ProductId" },
+          "name": { "type": "string" },
+          "price": { "type": "number" }
+        }
+      }
+    },
+    "user": {
+      "version": "1.0.0",
+      "schema": {
+        "$id": "user",
+        "type": "object",
+        "properties": {
+          "id": { "type": "UserId" },
+          "name": { "type": "string" },
+          "email": { "type": "string" }
+        }
+      }
+    }
+  },
+  "types": {
+    "ProductId": "integer",
+    "UserId": "string"
+  }
+}
