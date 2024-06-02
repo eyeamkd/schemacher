@@ -33,7 +33,7 @@ for (const [schemaName, schemaData] of Object.entries(schemaRegistry.schemas)) {
   interfaceCode += "}\n";
 
   const packageJson = {
-    name: `@your-org/${schemaName}-types`, // Customize the package name
+    name: `@eyeamkd/${schemaName}-types`, // Customize the package name
     version: schemaData.version,
     description: `TypeScript types for the ${schemaName} schema`,
     main: `${schemaName}.ts`,
