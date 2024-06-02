@@ -51,6 +51,8 @@ jobs:
           git add .             # Add any new/changed files to git
           git commit -m "Generated TypeScript client files" # Commit changes
           npm version patch       # Bump the package version in package.json
-          npm publish --access public # Publish the package
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc # Add this line
+          npm whoami  # Verify that you're logged in (optional)
+          npm publish --access public 
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} 
