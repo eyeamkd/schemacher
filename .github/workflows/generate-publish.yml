@@ -26,6 +26,11 @@ jobs:
 
       - name: Generate TypeScript Client
         run: node ./clients/typescript/generate.js
+      
+      - name: Add and Commit Generated Files
+        run: |
+          git add clients/typescript/*.ts
+          git commit -m "Generated TypeScript client files"
 
       - name: Set Git User Information
         run: |
