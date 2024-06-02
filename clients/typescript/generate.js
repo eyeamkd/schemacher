@@ -1,7 +1,10 @@
 const fs = require("fs");
 
 const schemaRegistry = JSON.parse(
-  fs.readFileSync("../../schemas/schema-registry.json", "utf8")
+  fs.readFileSync(
+    `${process.env.GITHUB_WORKSPACE}/schemas/schema-registry.json`,
+    "utf8"
+  )
 );
 
 for (const [schemaName, schemaData] of Object.entries(schemaRegistry.schemas)) {
