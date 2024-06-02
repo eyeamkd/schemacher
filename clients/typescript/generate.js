@@ -40,7 +40,7 @@ for (const [schemaName, schemaData] of Object.entries(schemaRegistry.schemas)) {
     types: `${schemaName}.ts`,
     repository: {
       type: "git",
-      url: "https://github.com/your-org/schemacher.git", // Replace with your repo URL
+      url: "https://github.com/eyeamkd/schemacher.git", // Replace with your repo URL
     },
   };
 
