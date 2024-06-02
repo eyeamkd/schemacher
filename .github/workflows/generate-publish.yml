@@ -3,8 +3,6 @@ name: Generate and Publish Client Libraries
 on:
   push:
     branches: [main]
-  pull_request:
-    branches: [main]
 
 jobs:
   generate-and-publish:
@@ -46,13 +44,19 @@ jobs:
 
       - name: Generate and Publish TypeScript Client
         run: |
-          cd clients/typescript # Move into the client directory
+          cd clients/typescript
           node generate.js       # Generate the files (including package.json)
           git add .             # Add any new/changed files to git
           git commit -m "Generated TypeScript client files" # Commit changes
-          npm version patch       # Bump the package version in package.json
-          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc # Add this line
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
           npm whoami  # Verify that you're logged in (optional)
-          npm publish --access public 
+
+          if npm view @eyeamkd/${schemaName}-types version >/dev/null 2>&1; then
+            npm version patch
+            npm publish --access public   # Publish inside the if block
+          else
+            npm publish --access public  # Publish initial version if it doesn't exist
+          fi
+
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} 

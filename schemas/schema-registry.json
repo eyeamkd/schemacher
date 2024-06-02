@@ -20,7 +20,8 @@
         "properties": {
           "id": { "type": "UserId" },
           "name": { "type": "string" },
-          "email": { "type": "string" }
+          "email": { "type": "string" },
+          "address": { "type": "string" }
         }
       }
     }
