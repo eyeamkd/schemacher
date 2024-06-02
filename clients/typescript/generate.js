@@ -1,8 +1,11 @@
 const fs = require("fs");
+const path = require("path");
+const clientDir = "./";
 
 const schemaRegistry = JSON.parse(
   fs.readFileSync(
     `${process.env.GITHUB_WORKSPACE}/schemas/schema-registry.json`,
+    // `../../schemas/schema-registry.json`,
     "utf8"
   )
 );
