@@ -26,6 +26,12 @@ jobs:
 
       - name: Generate TypeScript Client
         run: node ./clients/typescript/generate.js
+
+      - name: Set Git User Information
+        run: |
+          git config --global user.email "${{ secrets.GIT_EMAIL }}"
+          git config --global user.name "${{ secrets.GIT_NAME }}"
+
         
       - name: Publish TypeScript Client (if on main branch)
         if: github.ref == 'refs/heads/main'
