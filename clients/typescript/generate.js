@@ -29,5 +29,21 @@ for (const [schemaName, schemaData] of Object.entries(schemaRegistry.schemas)) {
   }
   interfaceCode += "}\n";
 
+  const packageJson = {
+    name: `@your-org/${schemaName}-types`, // Customize the package name
+    version: schemaData.version,
+    description: `TypeScript types for the ${schemaName} schema`,
+    main: `${schemaName}.ts`,
+    types: `${schemaName}.ts`,
+    repository: {
+      type: "git",
+      url: "https://github.com/your-org/schemacher.git", // Replace with your repo URL
+    },
+  };
+
   fs.writeFileSync(`./${schemaName}.ts`, interfaceCode);
+  fs.writeFileSync(
+    path.join(clientDir, "package.json"),
+    JSON.stringify(packageJson, null, 2)
+  );
 }
