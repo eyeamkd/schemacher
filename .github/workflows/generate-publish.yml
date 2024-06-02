@@ -29,7 +29,7 @@ jobs:
       
       - name: Add and Commit Generated Files
         run: |
-          git add clients/typescript/*.ts
+          git add .
           git commit -m "Generated TypeScript client files"
 
       - name: Set Git User Information
