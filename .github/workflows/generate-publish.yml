@@ -51,7 +51,7 @@ jobs:
           echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
           npm whoami  # Verify that you're logged in (optional)
 
-          if npm view @eyeamkd/${schemaName}-types version >/dev/null 2>&1; then
+          if npm view @eyeamkd/user-types version >/dev/null 2>&1; then
             npm version patch
             npm publish --access public   # Publish inside the if block
           else
