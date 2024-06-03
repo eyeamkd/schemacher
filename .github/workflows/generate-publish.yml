@@ -50,7 +50,7 @@ jobs:
           git commit -m "Generated TypeScript client files" # Commit changes
           echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
           npm whoami  # Verify that you're logged in (optional)
-
+          cd ../../package
           if npm view @eyeamkd/user-types version >/dev/null 2>&1; then
             npm version patch
             npm publish --access public   # Publish inside the if block
