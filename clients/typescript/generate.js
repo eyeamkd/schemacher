@@ -32,9 +32,24 @@ for (const [schemaName, schemaData] of Object.entries(schemaRegistry.schemas)) {
   }
   interfaceCode += "}\n";
 
+  function incrementVersion(currentVersion, releaseType = "patch") {
+    const [major, minor, patch] = currentVersion.split(".").map(Number);
+  
+    switch (releaseType.toLowerCase()) {
+      case "major":
+        return `${major + 1}.0.0`;
+      case "minor":
+        return `${major}.${minor + 1}.0`;
+      case "patch":
+      default:
+        return `${major}.${minor}.${patch + 1}`;
+    }
+  }
+  
+
   const packageJson = {
     name: `@eyeamkd/${schemaName}-types`, // Customize the package name
-    version: schemaData.version,
+    version: incrementVersion(schemaData.version),
     description: `TypeScript types for the ${schemaName} schema`,
     main: `${schemaName}.ts`,
     types: `${schemaName}.ts`,
