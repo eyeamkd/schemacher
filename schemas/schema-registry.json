@@ -21,7 +21,8 @@
           "id": { "type": "UserId" },
           "name": { "type": "string" },
           "email": { "type": "string" },
-          "address": { "type": "string" }
+          "address": { "type": "string" },
+          "phone": { "type": "string" }
         }
       }
     }
