@@ -48,25 +48,25 @@ jobs:
         run: |
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/eyeamkd/schemacher.git
 
-    #   - name: Generate and Publish TypeScript Client
-    #     run: |
-    #       cd clients/typescript
-    #       node generate.js       # Generate the files (including package.json)
-    #       cd ../../package
-    #       git add ../../schemas/version.json              # Add any new/changed files to git
-    #       git commit -m "Generated TypeScript client files" # Commit changes
-    #       echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
-    #       npm whoami  # Verify that you're logged in (optional)
+      - name: Generate and Publish TypeScript Client
+        run: |
+          cd clients/typescript
+          node generate.js       # Generate the files (including package.json)
+          cd ../../package
+          git add ../../schemas/version.json              # Add any new/changed files to git
+          git commit -m "Generated TypeScript client files" # Commit changes
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
+          npm whoami  # Verify that you're logged in (optional)
 
-    #       if npm view @eyeamkd/user-types version >/dev/null 2>&1; then
-    #         npm version patch
-    #         npm publish --access public   # Publish inside the if block
-    #       else
-    #         npm publish --access public  # Publish initial version if it doesn't exist
-    #       fi
+          if npm view @eyeamkd/user-types version >/dev/null 2>&1; then
+            npm version patch
+            npm publish --access public   # Publish inside the if block
+          else
+            npm publish --access public  # Publish initial version if it doesn't exist
+          fi
 
-    #       rm -rf package
-    #       git push
+          rm -rf package
+          git push
 
-    #     env:
-    #       NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
