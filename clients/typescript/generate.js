@@ -8,6 +8,8 @@ const versionJsonPath = `${process.env.GITHUB_WORKSPACE}/schemas/version.json`;
 if (!fs.existsSync(clientDir)) {
   fs.mkdirSync(clientDir);
   console.log(`Directory package created successfully.`);
+} else {
+  console.log(`Directory package already exists.`);
 }
 
 const schemaRegistry = JSON.parse(
