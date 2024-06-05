@@ -1,7 +1,9 @@
 const fs = require("fs");
 const path = require("path");
-const clientDir = "../../package";
-const versionJsonPath = "../../schemas/version.json";
+const clientDir = `${process.env.GITHUB_WORKSPACE}/package`;
+const versionJsonPath = `${process.env.GITHUB_WORKSPACE}/schemas/version.json`;
+// const clientDir = "../../package";
+// const versionJsonPath = "../../schemas/version.json";
 
 if (!fs.existsSync(clientDir)) {
   fs.mkdirSync(clientDir);
