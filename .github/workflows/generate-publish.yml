@@ -46,6 +46,7 @@ jobs:
         run: |
           cd clients/typescript
           node generate.js       # Generate the files (including package.json)
+          cd ../../package
           git add .             # Add any new/changed files to git
           git commit -m "Generated TypeScript client files" # Commit changes
           echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
@@ -57,6 +58,8 @@ jobs:
           else
             npm publish --access public  # Publish initial version if it doesn't exist
           fi
+
+          rm -rf package
 
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

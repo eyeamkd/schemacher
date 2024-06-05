@@ -1,4 +1,6 @@
 {
+  "packageName": "type-registry",
+  "description": "Centrally Managed Types for the Ecommerce Project",
   "schemas": {
     "product": {
       "version": "1.0.0",
@@ -49,10 +51,25 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "UserId"
+            "type": "OrderId"
           },
           "price": {
             "type": "number"
+          }
+        }
+      }
+    },
+    "vendors": {
+      "version": "1.0.0",
+      "schema": {
+        "$id": "user",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "VendorId"
+          },
+          "name": {
+            "type": "string"
           }
         }
       }
@@ -60,6 +77,8 @@
   },
   "types": {
     "ProductId": "integer",
-    "UserId": "string"
+    "UserId": "string",
+    "VendorId": "string",
+    "OrderId": "string"
   }
 }
