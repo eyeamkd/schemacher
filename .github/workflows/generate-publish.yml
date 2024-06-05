@@ -66,7 +66,6 @@ jobs:
           fi
 
           rm -rf package
-          git add . 
           git commit -m "Generated TypeScript client files" # Commit changes 
           git push
 

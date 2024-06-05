@@ -1,9 +1,0 @@
-{
-  "name": "@eyeamkd/type-registry",
-  "version": "1.0.18",
-  "description": "Centrally Managed Types for the Ecommerce Project",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/eyeamkd/schemacher.git"
-  }
-}
