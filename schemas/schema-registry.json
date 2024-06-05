@@ -55,6 +55,9 @@
           },
           "price": {
             "type": "number"
+          },
+          "commodityNumber": {
+            "type": "number"
           }
         }
       }
