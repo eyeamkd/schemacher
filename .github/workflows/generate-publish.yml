@@ -60,6 +60,9 @@ jobs:
           fi
 
           rm -rf package
+          git add . 
+          git commit -m "Generated TypeScript client files" # Commit changes 
+          git push
 
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
