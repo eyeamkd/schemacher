@@ -1,5 +1,19 @@
 {
   "packageName": "type-registry",
   "description": "Centrally Managed Types for the Ecommerce Project",
-  "schemas": {}
+  "schemas": {
+    "user": {
+      "version": "1.0.0",
+      "schema": {
+        "$id": "user",
+        "type": "object",
+        "properties": {
+          "id": "UserId"
+        }
+      }
+    }
+  },
+  "types": {
+    "UserId": "string"
+  }
 }

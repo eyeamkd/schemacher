@@ -1,0 +1,43 @@
+name: Generate and Publish Client Libraries
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  generate-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "16"
+      - name: Install Dependencies
+        run: npm install
+      - name: Generate Typescript Client
+        run: node ./clients/typescript/generate.js
+      - name: Set Git User Information
+        run: |
+          git config --global user.email "${{secrets.SCHEMACHER_GIT_EMAIL}}" 
+          git config --global user.name "${{secrets.SCHEMACHER_GIT_NAME}}"
+      - name: Generate and Publish Typescript Client
+        run: |
+          cd clients/typescript 
+          node generate.js
+          cd ../../package 
+          git add .
+          git commit -m "Generated Clients"
+          npm whoami 
+
+          if npm view <repo-name> version >/dev/null 2>&1; then
+            npm version patch 
+            npm publish --access public 
+          else 
+            npm publish --access public 
+          fi 
+
+          rm -rf package
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
