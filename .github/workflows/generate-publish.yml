@@ -42,6 +42,12 @@ jobs:
       #     npm version patch # Increment version (optional)
       #     npm publish --access public
 
+      - name: Authenticate with GitHub
+        env:
+          GITHUB_TOKEN: ${{ secrets.G_TOKEN }}
+        run: |
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/eyeamkd/schemacher.git
+
       - name: Generate and Publish TypeScript Client
         run: |
           cd clients/typescript
