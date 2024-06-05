@@ -48,14 +48,14 @@ for (const [schemaName, schemaData] of Object.entries(schemaRegistry.schemas)) {
   
 
   const packageJson = {
-    name: `@eyeamkd/${schemaName}-types`, // Customize the package name
+    name: `@eyeamkd/types-registry`, 
     version: incrementVersion(schemaData.version),
     description: `TypeScript types for the ${schemaName} schema`,
     main: `${schemaName}.ts`,
     types: `${schemaName}.ts`,
     repository: {
       type: "git",
-      url: "https://github.com/eyeamkd/schemacher.git", // Replace with your repo URL
+      url: "https://github.com/eyeamkd/schemacher.git",
     },
   };
 
