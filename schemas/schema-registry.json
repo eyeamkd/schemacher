@@ -16,6 +16,9 @@
           },
           "price": {
             "type": "number"
+          },
+          "tag": {
+            "type": "string"
           }
         }
       }
