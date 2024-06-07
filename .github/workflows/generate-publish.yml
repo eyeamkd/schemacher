@@ -65,7 +65,8 @@ jobs:
             npm publish --access public  # Publish initial version if it doesn't exist
           fi
 
-          rm -rf package
+          rm -rf package 
+          git pull origin main
           git add . 
           git commit -m "Generated TypeScript client files" # Commit changes 
           git push
