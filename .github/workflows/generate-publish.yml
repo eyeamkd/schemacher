@@ -54,7 +54,6 @@ jobs:
           node generate.js       # Generate the files (including package.json)
           cd ../../package
           git add .             # Add any new/changed files to git
-          git commit -m "Generated TypeScript client files" # Commit changes
           echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
           npm whoami  # Verify that you're logged in (optional)
 
