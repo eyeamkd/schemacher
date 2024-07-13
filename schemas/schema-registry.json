@@ -97,6 +97,18 @@
           }
         }
       }
+    },
+    "email": {
+      "version": "1.0.0",
+      "schema": {
+        "$id": "email",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "EmailId"
+          }
+        }
+      }
     }
   },
   "types": {
@@ -104,6 +116,7 @@
     "UserId": "string",
     "VendorId": "string",
     "OrderId": "string",
-    "OrderItemId": "string"
+    "OrderItemId": "string",
+    "EmailId": "string"
   }
 }
