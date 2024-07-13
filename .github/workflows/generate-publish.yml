@@ -52,6 +52,6 @@ jobs:
           else
             npm publish --access public  # Publish initial version if it doesn't exist
           fi
-          cd ../../ && rm -rf package
+          cd ../ && rm -rf package
           git add . && git commit -m "Update TypeScript Client" && git push
 
