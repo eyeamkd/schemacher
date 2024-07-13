@@ -1,9 +1,15 @@
 const fs = require("fs");
 const path = require("path");
-const clientDir = `${process.env.GITHUB_WORKSPACE}/package`;
-const versionJsonPath = `${process.env.GITHUB_WORKSPACE}/schemas/version.json`;
-// const clientDir = "../../package";
-// const versionJsonPath = "../../schemas/version.json";
+const clientDir = process.env.GITHUB_WORKSPACE
+  ? `${process.env.GITHUB_WORKSPACE}/package`
+  : "../../package";
+const versionJsonPath = process.env.GITHUB_WORKSPACE
+  ? `${process.env.GITHUB_WORKSPACE}/schemas/version.json`
+  : "../../schemas/version.json";
+
+const schemaPath = process.env.GITHUB_WORKSPACE
+  ? `${process.env.GITHUB_WORKSPACE}/schemas/schema-registry.json`
+  : "../../schemas/schema-registry.json";
 
 if (!fs.existsSync(clientDir)) {
   fs.mkdirSync(clientDir);
@@ -12,13 +18,7 @@ if (!fs.existsSync(clientDir)) {
   console.log(`Directory package already exists.`);
 }
 
-const schemaRegistry = JSON.parse(
-  fs.readFileSync(
-    `${process.env.GITHUB_WORKSPACE}/schemas/schema-registry.json`,
-    // `../../schemas/schema-registry.json`,
-    "utf8"
-  )
-);
+const schemaRegistry = JSON.parse(fs.readFileSync(schemaPath, "utf8"));
 
 function incrementVersion(currentVersion, releaseType = "patch") {
   const [major, minor, patch] = currentVersion.split(".").map(Number);
@@ -34,20 +34,23 @@ function incrementVersion(currentVersion, releaseType = "patch") {
   }
 }
 
-// // Read the existing version from version.json
-// const versionJsonPath = path.join(clientDir, "version.json");
 const versionData = JSON.parse(fs.readFileSync(versionJsonPath, "utf8"));
+console.log("Version Data: ", versionData);
 
 // Determine the type of change
 const releaseType = "patch"; // Change this to "minor" or "major" as needed
+console.log("Release Type: ", releaseType);
 
 // Increment the version number
 const newVersion = incrementVersion(versionData.version, releaseType);
+console.log("New Version: ", newVersion);
 
 // Write the updated version back to version.json
-fs.writeFileSync(versionJsonPath, JSON.stringify({ version: newVersion }, null, 2));
-
-
+fs.writeFileSync(
+  versionJsonPath,
+  JSON.stringify({ version: newVersion }, null, 2)
+);
+console.log("Version File Updated");
 
 for (const [schemaName, schemaData] of Object.entries(schemaRegistry.schemas)) {
   const schema = schemaData.schema;
@@ -73,9 +76,10 @@ for (const [schemaName, schemaData] of Object.entries(schemaRegistry.schemas)) {
 
   fs.writeFileSync(path.join(clientDir, `${schemaName}.ts`), interfaceCode);
 }
+console.log("TypeScript Interfaces Generated");
 
 const packageJson = {
-  name: `@eyeamkd/${schemaRegistry.packageName}`, 
+  name: `@eyeamkd/${schemaRegistry.packageName}`,
   version: newVersion,
   description: `${schemaRegistry.description}`,
   repository: {
@@ -88,3 +92,4 @@ fs.writeFileSync(
   path.join(clientDir, "package.json"),
   JSON.stringify(packageJson, null, 2)
 );
+console.log("Package.json Generated");
