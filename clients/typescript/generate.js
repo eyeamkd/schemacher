@@ -70,11 +70,22 @@ for (const [schemaName, schemaData] of Object.entries(schemaRegistry.schemas)) {
   }
 
   // Generate TypeScript interface
-  let interfaceCode = `export interface ${schemaName} {\n`;
-  for (const [propName, propDef] of Object.entries(schema.properties)) {
-    interfaceCode += `  ${propName}: ${propDef.type};\n`;
+  let interfaceCode = "";
+  if (schema.properties) {
+    interfaceCode = `export interface ${schemaName} {\n`;
+    for (const [propName, propDef] of Object.entries(schema.properties)) {
+      interfaceCode += `  ${propName}: ${propDef.type};\n`;
+    }
+    interfaceCode += "}\n";
   }
-  interfaceCode += "}\n";
+  if (schema.enum) {
+    const camelCaseName = schemaName.replace(/-([a-z])/g, (g) =>
+      g[1].toUpperCase()
+    );
+    interfaceCode = `export type ${camelCaseName} = `;
+    const enumStringValues = schema.enum.map((value) => `"${value}"`);
+    interfaceCode += ` ${enumStringValues.join(" | ")};\n`;
+  }
 
   fs.writeFileSync(path.join(clientDir, `${schemaName}.ts`), interfaceCode);
 }
