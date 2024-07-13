@@ -97,13 +97,13 @@
           }
         }
       }
-    },
-    "types": {
-      "ProductId": "integer",
-      "UserId": "string",
-      "VendorId": "string",
-      "OrderId": "string",
-      "OrderItemId": "string"
     }
+  },
+  "types": {
+    "ProductId": "integer",
+    "UserId": "string",
+    "VendorId": "string",
+    "OrderId": "string",
+    "OrderItemId": "string"
   }
 }
