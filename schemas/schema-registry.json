@@ -76,12 +76,34 @@
           }
         }
       }
+    },
+    "order-item": {
+      "version": "1.0.0",
+      "schema": {
+        "$id": "order-item",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "OrderItemId"
+          },
+          "orderId": {
+            "type": "OrderId"
+          },
+          "productId": {
+            "type": "ProductId"
+          },
+          "quantity": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "types": {
+      "ProductId": "integer",
+      "UserId": "string",
+      "VendorId": "string",
+      "OrderId": "string",
+      "OrderItemId": "string"
     }
-  },
-  "types": {
-    "ProductId": "integer",
-    "UserId": "string",
-    "VendorId": "string",
-    "OrderId": "string"
   }
 }
