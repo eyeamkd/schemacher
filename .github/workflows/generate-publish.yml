@@ -45,16 +45,15 @@ jobs:
           cd clients/typescript
           node generate.js       # Generate the files (including package.json)
           cd ../../package
-          git add .             # Add any new/changed files to git
 
-          if npm view @eyeamkd/user-types version >/dev/null 2>&1; then
+          if npm view @eyeamkd/type-registry version >/dev/null 2>&1; then
             npm version patch
             npm publish --access public   # Publish inside the if block
           else
             npm publish --access public  # Publish initial version if it doesn't exist
           fi
 
-          git pull origin main
-          git add . 
-          git commit -m "Generated TypeScript client files" # Commit changes 
-          git push
+          cd ../../ 
+          rm -rf package
+          git add . && git commit -m "Update TypeScript Client"
+
