@@ -58,6 +58,8 @@ for (const [schemaName, schemaData] of Object.entries(schemaRegistry.schemas)) {
   // Resolve custom types and convert "integer" to "number"
   for (const propName in schema.properties) {
     let propType = schema.properties[propName].type;
+    console.log("Prop Type: ", propType);
+    console.log("Prop Name: ", propName);
     if (schemaRegistry.types[propType]) {
       propType = schemaRegistry.types[propType];
     }
